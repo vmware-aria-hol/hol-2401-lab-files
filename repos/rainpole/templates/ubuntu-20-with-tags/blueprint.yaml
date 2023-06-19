@@ -1,0 +1,61 @@
+version: 1
+name: Ubuntu 20 with Tags
+
+formatVersion: 1
+inputs:
+  size:
+    type: string
+    enum:
+      - tiny
+      - small
+    default: small
+    description: VM Size
+    title: T-Shirt Size
+  platform:
+    type: string
+    enum:
+      - vsphere
+      - aws
+    default: vsphere
+    description: Deploy to which platform
+    title: Platform
+  env:
+    type: string
+    enum:
+      - dev
+    default: dev
+    description: There can only be DEV
+    title: Environment
+resources:
+  On-Prem_VM:
+    type: Cloud.Machine
+    properties:
+      name: onpremvm
+      image: Ubuntu20
+      tags:
+        - key: env
+          value: "${input.env}"
+      flavor: "${input.size}"
+      constraints:
+        - tag: '${"cloud:" + input.platform + ":soft"}'
+        - tag: '${"env:" + input.env}'
+      networks:
+        - network: "${resource.Network_1.id}"
+          assignment: static
+          assignPublicIpAddress: false
+      customizationSpec: CentOS
+  Cloud_VM:
+    type: Cloud.Machine
+    properties:
+      name: cloudvm
+      image: Ubuntu20
+      flavor: "${input.size}"
+      constraints:
+        - tag: "cloud:aws"
+        - tag: '${"env:" + input.env + ":hard"}'
+  Network_1:
+    type: Cloud.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: "net:vsphere"
