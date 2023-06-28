@@ -4,7 +4,7 @@
 setlocal enabledelayedexpansion
 
 :: Define the array of server IP addresses
-set "server_ips=192.168.110.120 192.168.110.121 192.168.110.122"
+set "server_ips=192.168.110.120 192.168.110.122"
 
 :: Define the login name
 set "username=root"
