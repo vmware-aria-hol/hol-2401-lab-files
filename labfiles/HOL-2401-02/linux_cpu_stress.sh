@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # ########################
 # This script creates 20 infinite loops for CPU stress 
