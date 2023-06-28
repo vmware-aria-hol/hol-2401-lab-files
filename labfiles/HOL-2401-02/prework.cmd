@@ -24,3 +24,4 @@ pscp -r "%local_directory%\*.%file_extension%" %username%@%server_ip%:%remote_di
 
 :: Set file permissions on the remote server
 plink -ssh -batch %username%@%server_ip% "chmod 755 %remote_directory%/*.%file_extension%"
+plink -ssh -batch %username%@%server_ip% "sed -i -e 's/\r$//' %remote_directory%/*.%file_extension%"
