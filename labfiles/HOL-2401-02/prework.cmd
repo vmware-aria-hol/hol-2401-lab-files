@@ -19,7 +19,7 @@ cls
 echo Processing server %server_ip% with username %username%
 
 :: Copy files from local to remote server
-pscp -r "%local_directory%\*.%file_extension%" %username%@%server_ip%:%remote_directory% --batch
+pscp -r "%local_directory%\*.%file_extension%" %username%@%server_ip%:%remote_directory% 
 
 :: Set file permissions on the remote server
-plink -ssh -batch %username%@%server_ip% "chmod 755 %remote_directory%\*.%file_extension%"
+plink -ssh -batch %username%@%server_ip% "chmod 755 %remote_directory%/*.%file_extension%"
