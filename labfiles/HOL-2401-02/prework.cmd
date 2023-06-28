@@ -1,4 +1,5 @@
 @echo off
+
 setlocal enabledelayedexpansion
 
 :: Define the server IP address
