@@ -12,7 +12,7 @@ set "local_directory=C:\hol-2401-lab-files\labfiles\HOL-2401-02"
 set "remote_directory=/root"
 
 :: Define the array of file extensions
-set "file_extensions=sh cmd"
+set "file_extensions=sh"
 
 cls
 
