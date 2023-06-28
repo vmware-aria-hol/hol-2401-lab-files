@@ -1,6 +1,4 @@
-
 @echo off
-
 setlocal enabledelayedexpansion
 
 :: Define the array of server IP addresses
@@ -10,11 +8,11 @@ set "server_ips=192.168.110.120 192.168.110.122"
 set "username=root"
 
 :: Set the local and remote directories
-set "local_directory=C:\local\files"
-set "remote_directory=/root/files"
+set "local_directory=C:\hol-2401-lab-files\labfiles\HOL-2401-02"
+set "remote_directory=/root"
 
 :: Define the array of file extensions
-set "file_extensions=sh cmd exe"
+set "file_extensions=sh cmd"
 
 cls
 
