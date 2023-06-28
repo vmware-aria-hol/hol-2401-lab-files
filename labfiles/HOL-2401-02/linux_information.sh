@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Hostname
 echo "Hostname: $(hostname)"
