@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Number of SYSLOG errors in the last 24 hours
 
