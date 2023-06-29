@@ -1,0 +1,34 @@
+formatVersion: 1
+name: Ubuntu 20 with Salt
+version: 1
+inputs: {}
+resources:
+  saltMinion:
+    type: Cloud.SaltStack
+    properties:
+      hosts:
+        - ${resource.ubuntu.id}
+      masterId: saltstack_enterprise_installer
+      stateFiles:
+        - /presence/init.sls
+      saltEnvironment: base
+  ubuntu:
+    type: Cloud.vSphere.Machine
+    properties:
+      remoteAccess:
+        authentication: usernamePassword
+        username: holuser
+        password: VMware1!
+      image: Ubuntu20
+      flavor: small
+      constraints:
+        - tag: cloud:vsphere
+      networks:
+        - network: ${resource.vsphere_network.id}
+          assignment: static
+  vsphere_network:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: net:vsphere
