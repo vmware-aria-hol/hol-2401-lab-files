@@ -47,7 +47,7 @@ def main(network_name, gateway_cidr):
     client = nsx_create_client(nsx_user='admin',
                                nsx_password='VMware1!VMware1!',
                                nsx_endpoint=nsx_policy_client,
-                               nsx_host='nsx-mgr.corp.local', nsx_port=443)
+                               nsx_host='nsx-mgr.corp.vmbeans.com', nsx_port=443)
 
     if network_name and gateway_cidr:
         print(f"Creating Network segment {network_name} - {gateway_cidr}")
