@@ -6,7 +6,7 @@ inputs:
     type: string
     title: Image
     enum:
-      - Ubuntu18
+      - Ubuntu20
       - Windows2019
   hostname:
     type: string
