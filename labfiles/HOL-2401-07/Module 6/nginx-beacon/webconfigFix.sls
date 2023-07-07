@@ -9,7 +9,7 @@ sleep_20:
 # Copy the file to the minion
 deploy_index_html:
   file.managed:
-    - name: /usr/share/nginx/html/index.html
+    - name: /var/www/html/index.html
     - source: salt://nginx-beacon/files/index.html?env=sse
     - require:
       - sleep 20

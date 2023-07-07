@@ -17,15 +17,15 @@ Configure Firewall:
 
 apache_remove:
   pkg.removed:
-    - name: httpd
+    - name: apache2
 
 configure_nginx_html:
     file.managed:
-      - name: /usr/share/nginx/html/index.html
+      - name: /var/www/html/index.html
       - source: salt://nginx-beacon/files/index.html?env=sse
       
 needed-pkgs:
-  pip.installed:
+  pkg.installed:
     - pkgs:
       - pyinotify
       
