@@ -15,4 +15,4 @@ nginx_restart_service:
 configure_nginx_html:
   file.managed:
     - name: /var/www/html/index.html
-    - source: salt://nginx/files/index.html?env=sse
+    - source: salt://mod3/nginx/files/index.html?env=sse
