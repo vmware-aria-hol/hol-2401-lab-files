@@ -1,8 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: # set folderpath=%TEMP%
-set folderpath=C:\TEMP
+set folderpath=%TEMP%
+:: # set folderpath=C:\TEMP
 
 set /a count=0
 
