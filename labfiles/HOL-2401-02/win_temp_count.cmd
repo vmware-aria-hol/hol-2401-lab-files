@@ -15,5 +15,3 @@ endlocal
 
 :: # echo Number of files in %folderpath%: !count!
 :: # exit /b !count!
-
-endlocal
