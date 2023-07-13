@@ -8,13 +8,6 @@ nxginx_restart_service:
     - watch: 
         - file: configure_nginx_html
 
-Configure Firewall:
-  firewalld.present:
-    - name: public
-    - ports:
-        - 80/tcp
-        - 443/tcp
-
 apache_remove:
   pkg.removed:
     - name: apache2
