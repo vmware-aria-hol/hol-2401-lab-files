@@ -15,7 +15,7 @@ apache_remove:
 configure_nginx_html:
     file.managed:
       - name: /var/www/html/index.html
-      - source: salt://nginx-beacon/files/index.html?env=sse
+      - source: salt://nginx-beacon/files/index.html?env=main
       
 needed-pkgs:
   pkg.installed:
@@ -25,7 +25,7 @@ needed-pkgs:
 install_beacon:
   file.managed:
     - name: /etc/salt/minion.d/nginx-beacon.conf
-    - source: salt://nginx-beacon/files/nginx-beacon.conf?env=sse
+    - source: salt://nginx-beacon/files/nginx-beacon.conf?env=main
     - makedirs: True
     
 restart_minion_service:
