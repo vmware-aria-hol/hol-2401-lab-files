@@ -20,7 +20,7 @@ configure_nginx_html:
 needed-pkgs:
   pkg.installed:
     - pkgs:
-      - pyinotify
+      - python3-pyinotify
       
 install_beacon:
   file.managed:
