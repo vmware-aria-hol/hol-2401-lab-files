@@ -6,4 +6,4 @@ fix_index_html:
     - tgt: {{ data['id'] }}
     - arg: 
       - nginx-beacon.webconfigFix
-      - saltenv=sse
+      - saltenv=main

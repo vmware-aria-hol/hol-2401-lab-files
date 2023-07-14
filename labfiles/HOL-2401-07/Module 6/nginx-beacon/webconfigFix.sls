@@ -10,7 +10,7 @@ sleep_20:
 deploy_index_html:
   file.managed:
     - name: /var/www/html/index.html
-    - source: salt://nginx-beacon/files/index.html?env=sse
+    - source: salt://nginx-beacon/files/index.html?env=main
     - require:
       - sleep 20
       
