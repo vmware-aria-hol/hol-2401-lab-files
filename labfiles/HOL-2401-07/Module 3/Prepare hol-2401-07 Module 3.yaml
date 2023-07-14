@@ -1,0 +1,95 @@
+---
+project: HOL Project
+kind: PIPELINE
+name: Prepare HOL-2401-07 Module 3
+icon: organization,left, is-pink
+enabled: true
+global: false
+concurrency: 1
+input:
+  aria-auto_admin_domain: corp.vmbeans.com
+  aria-auto_admin_username: holadmin@corp.vmbeans.com
+  aria-auto_fqdn: aria-auto.corp.vmbeans.com
+_inputMeta:
+  aria-auto_admin_username:
+    description: ''
+    mandatory: true
+  aria-auto_admin_domain:
+    description: ''
+    mandatory: false
+  aria-auto_fqdn:
+    description: ''
+    mandatory: true
+workspace:
+stageOrder:
+- Prepare
+- Destroy
+stages:
+  Destroy:
+    taskOrder:
+    - Delete K8S Zone
+    - Delete K8S Cluster
+    tasks:
+      Delete K8S Cluster:
+        type: REST
+        ignoreFailure: true
+        preCondition: ${Prepare.Get K8S Clusters.output.responseJson.content[0].name} == "dev-project"
+        input:
+          action: delete
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/k8s/clusters/${Prepare.Get K8S Clusters.output.responseJson.content[0].id}
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
+      Delete K8S Zone:
+        type: REST
+        ignoreFailure: true
+        preCondition: ${Prepare.Get K8S Zones.output.responseJson.content[0].name} == "HOL vSphere with
+          Tanzu"
+        input:
+          action: delete
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/k8s-zones/${Prepare.Get K8S Zones.output.responseJson.content[0].id}
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
+  Prepare:
+    taskOrder:
+    - Get API Token
+    - Get K8S Zones,Get K8S Clusters
+    tasks:
+      Get K8S Zones:
+        type: REST
+        input:
+          action: get
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/k8s-zones
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
+      Get API Token:
+        type: REST
+        input:
+          action: post
+          url: https://${input.aria-auto_fqdn}/csp/gateway/am/api/login?access_token
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+          payload: |-
+            {
+              "username": "${input.aria-auto_admin_username}",
+              "password": "${var.aria-auto_admin_password}"
+            }
+      Get K8S Clusters:
+        type: REST
+        input:
+          action: get
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/k8s/clusters
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
