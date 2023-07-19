@@ -5,7 +5,7 @@ name: Prepare HOL-2401-07 Module 3
 icon: organization,left, is-pink
 enabled: true
 global: false
-concurrency: 1
+concurrency: 5
 input:
   aria-auto_admin_domain: corp.vmbeans.com
   aria-auto_admin_username: holadmin@corp.vmbeans.com
@@ -21,6 +21,15 @@ _inputMeta:
     description: ''
     mandatory: true
 workspace:
+  type: DOCKER
+  endpoint: HOL docker
+  image: gitlab.corp.vmbeans.com:5050/hol/registry/k8s-ci:latest
+  registry: ''
+  path: ''
+  autoCloneForTrigger: false
+  limits:
+    cpu: 1.0
+    memory: 512
 stageOrder:
 - Prepare
 - Destroy
@@ -29,6 +38,7 @@ stages:
     taskOrder:
     - Delete K8S Zone
     - Delete K8S Cluster
+    - Delete Supervisor Cluste
     tasks:
       Delete K8S Cluster:
         type: REST
@@ -55,16 +65,41 @@ stages:
             Content-Type: application/json
             Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
           payload: ''
+      Delete Supervisor Cluste:
+        type: REST
+        ignoreFailure: true
+        preCondition: ${Prepare.Get Supervisor Cluster.output.responseJson.content[0].name} == "Workload1"
+        input:
+          action: delete
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/supervisor-clusters/${Prepare.Get Supervisor
+            Cluster ID.output.exports.clusterId}
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
   Prepare:
     taskOrder:
     - Get API Token
     - Get K8S Zones,Get K8S Clusters
+    - Get Supervisor Cluster,Get Supervisor Namespace
+    - Get Supervisor Cluster ID
     tasks:
       Get K8S Zones:
         type: REST
         input:
           action: get
           url: https://${input.aria-auto_fqdn}/cmx/api/resources/k8s-zones
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
+      Get Supervisor Cluster:
+        type: REST
+        input:
+          action: get
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/supervisor-clusters
           headers:
             Accept: application/json
             Content-Type: application/json
@@ -93,3 +128,27 @@ stages:
             Content-Type: application/json
             Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
           payload: ''
+      Get Supervisor Namespace:
+        type: REST
+        input:
+          action: get
+          url: https://${input.aria-auto_fqdn}/cmx/api/resources/supervisor-namespaces
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: ${Prepare.Get API Token.output.responseHeaders.Authorization}
+          payload: ''
+      Get Supervisor Cluster ID:
+        type: CI
+        input:
+          steps:
+          - echo "Fetching Cluster ID"
+          - ''
+          - export clusterId=$(echo "${Prepare.Get Supervisor Cluster.output.responseJson.content[0].documentSelfLink}"
+            | grep -o '[0-9a-f]\{40\}')
+          export:
+          - clusterId
+          artifacts: [
+            ]
+          process: [
+            ]
