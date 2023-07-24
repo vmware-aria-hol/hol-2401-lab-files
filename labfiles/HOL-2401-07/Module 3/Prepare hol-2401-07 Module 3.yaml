@@ -38,7 +38,7 @@ stages:
     taskOrder:
     - Delete K8S Zone
     - Delete K8S Cluster
-    - Delete Supervisor Cluste
+    - Delete Supervisor Cluster
     tasks:
       Delete K8S Cluster:
         type: REST

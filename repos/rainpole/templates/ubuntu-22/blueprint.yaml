@@ -1,6 +1,6 @@
-formatVersion: 1
 name: Ubuntu 22
-version: 1
+version: 1.0.0
+formatVersion: 1
 inputs: {}
 resources:
   ubuntu:

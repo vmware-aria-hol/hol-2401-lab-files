@@ -9,8 +9,8 @@
 # This cloud template will deploy 1 machine connected to a vSphere network and run scripts to configure access.                 *
 #********************************************************************************************************************************
 # Don't forget to give your cloud template a useful name!
-version: 1.0
 name: vSphere VM with Comments
+version: 1.0.0
 formatVersion: 1
 inputs:
   # Inputs section is where you define inputs that the user will be able to specify
