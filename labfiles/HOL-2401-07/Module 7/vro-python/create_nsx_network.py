@@ -52,7 +52,7 @@ def main(network_name, gateway_cidr):
     if network_name and gateway_cidr:
         print(f"Creating Network segment {network_name} - {gateway_cidr}")
         nsx_create_segment(client, network_name, gateway_cidr,
-                           '/infra/sites/default/enforcement-points/default/transport-zones/5fb17f23-e943-46e6-aa92-1580128a2475',
+                           '/infra/sites/default/enforcement-points/default/transport-zones/00bf1d71-8e63-4333-ba20-4469ff176841',
                            '/infra/tier-0s/hol-gw')
     else:
         raise Exception(

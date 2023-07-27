@@ -1,6 +1,5 @@
-version: 1
 name: Ubuntu 20 with Tags
-
+version: 1.0.0
 formatVersion: 1
 inputs:
   size:

@@ -1,5 +1,5 @@
 name: Windows with cloudbase-init
-version: 2
+version: 1.0.0
 formatVersion: 1
 inputs: {}
 resources:
