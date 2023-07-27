@@ -1,6 +1,8 @@
 nginx_install:
   pkg.installed:
     - name: nginx
+    - require:
+      - apache_remove
 
 nxginx_restart_service:
   service.running:

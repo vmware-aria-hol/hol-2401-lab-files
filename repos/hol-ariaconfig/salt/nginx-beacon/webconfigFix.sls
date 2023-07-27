@@ -12,7 +12,7 @@ deploy_index_html:
     - name: /var/www/html/index.html
     - source: salt://nginx-beacon/files/index.html?env=main
     - require:
-      - sleep 20
+      - sleep_20
       
 # Restart the nginx service
 restart_nginx:
