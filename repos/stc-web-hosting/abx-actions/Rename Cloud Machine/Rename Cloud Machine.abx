@@ -1,0 +1,13 @@
+---
+exportVersion: "1"
+exportId: "8a74807979f214f20179fc94b9640001"
+name: "Rename Cloud Machine"
+runtime: "python"
+entrypoint: "handler"
+timeoutSeconds: 600
+deploymentTimeoutSeconds: 900
+actionType: "SCRIPT"
+provider: "on-prem"
+configuration:
+  const_azure-system_managed_identity: false
+memoryInMB: 300

@@ -1,0 +1,18 @@
+name: Deploy vSphere K8s namespace
+version: 2
+formatVersion: 1
+inputs:
+  ns-name:
+    type: string
+    title: Enter Supervisor Name
+    description: Enter Supervisor Name
+resources:
+  Cloud_SV_Namespace_1:
+    type: Cloud.SV.Namespace
+    properties:
+      name: '${input.ns-name}'
+      storage:
+        - profile:
+            constraints:
+              - tag: 'lab:shared-storage'
+            limitMb: 0
