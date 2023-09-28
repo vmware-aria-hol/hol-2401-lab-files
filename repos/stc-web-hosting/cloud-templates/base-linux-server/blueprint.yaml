@@ -37,7 +37,7 @@ resources:
       tags:
         - key: projectCode
           value: '${input.projectCode}'
-        - key: vraProjectName
+        - key: projectName
           value: '${env.projectName}'
       constraints:
         - tag: 'cloud:vsphere'

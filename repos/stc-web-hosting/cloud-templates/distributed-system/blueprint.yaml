@@ -65,7 +65,7 @@ resources:
   mysql:
     type: Cloud.vSphere.Machine
     properties:
-      image: Ubuntu18
+      image: ubuntu20
       flavor: medium
       cloudConfig: |
         repo_update: true
@@ -110,5 +110,5 @@ resources:
       name: oc_network2
       networkType: routed
       constraints:
-        - tag: "net:nsxt"
+        - tag: "net:nsx"
         - tag: "env:prod"

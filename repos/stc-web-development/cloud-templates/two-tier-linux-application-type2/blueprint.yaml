@@ -26,7 +26,7 @@ inputs:
     type: string
     enum:
       - Ubuntu20
-      - Ubuntu18
+      - ubuntu20
   tier1_count:
     title: number of servers in this tier
     type: number
@@ -105,7 +105,7 @@ resources:
       tags:
         - key: projectCode
           value: '${input.projectCode}'
-        - key: vraProjectName
+        - key: projectName
           value: '${env.projectName}'
       constraints:
         - tag: 'cloud:vsphere'
@@ -136,7 +136,7 @@ resources:
       tags:
         - key: projectCode
           value: '${input.projectCode}'
-        - key: vraProjectName
+        - key: projectName
           value: '${env.projectName}'
       constraints:
         - tag: 'cloud:vsphere'

@@ -16,7 +16,7 @@ inputs:
     enum:
       - Ubuntu20
       - Ubuntu22
-    default: Ubuntu18
+    default: Ubuntu20
   tier1_ServerRole:
     title: Tier 1 Server Role
     type: string
@@ -47,8 +47,8 @@ inputs:
     type: string
     enum:
       - Ubuntu20
-      - Ubuntu18
-    default: Ubuntu18
+      - Ubuntu22
+    default: Ubuntu20
   tier2_ServerRole:
     title: Tier 2 Server Role
     type: string
@@ -139,7 +139,7 @@ resources:
       tags:
         - key: projectCode
           value: '${input.projectCode}'
-        - key: vraProjectName
+        - key: projectName
           value: '${env.projectName}'
   tier2_linux:
     type: Cloud.vSphere.Machine
@@ -198,7 +198,7 @@ resources:
       tags:
         - key: projectCode
           value: '${input.projectCode}'
-        - key: vraProjectName
+        - key: projectName
           value: '${env.projectName}'
       networks:
         - name: '${resource.Cloud_Network_2.name}'
@@ -210,5 +210,5 @@ resources:
       name: '${input.enviornment + "-routed"}'
       networkType: routed
       constraints:
-        - tag: 'net:nsxt'
+        - tag: 'net:nsx'
         - tag: 'env:prod'
