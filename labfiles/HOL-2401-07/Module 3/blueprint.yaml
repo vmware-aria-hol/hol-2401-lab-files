@@ -1,0 +1,15 @@
+formatVersion: 1
+inputs:
+  name:
+    type: string
+    title: namespace
+resources:
+  Cloud_SV_Namespace_1:
+    type: Cloud.SV.Namespace
+    properties:
+      name: ${input.name}
+      storage:  
+        - profile:  
+            constraints:  
+              - tag: 'lab:shared-storage'
+            limitMb: 0
