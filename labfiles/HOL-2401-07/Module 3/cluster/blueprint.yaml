@@ -1,0 +1,20 @@
+name: Module 3 - TKG Cluster
+version: 1.0
+formatVersion: 1
+inputs:
+  clusterName:
+    type: string
+  clusterPlan:
+    type: string
+    enum:
+      - 1cp-1wn
+      - 1cp-3wn
+      - 3cp-6wn
+resources:
+  Cloud_Tanzu_Cluster_1:
+    type: Cloud.Tanzu.Cluster
+    properties:
+      name: ${input.clusterName}
+      plan: ${input.clusterPlan}
+      constraints:
+          - tag: lab:shared-storage
